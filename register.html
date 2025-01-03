@@ -1,99 +1,236 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internet Service Registration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pengisian Lokasi</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+  <style>
+    /* Reset dan dasar layout */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
 
-        label {
-            margin-bottom: 5px;
-            color: #555;
-        }
+    .form-group {
+      margin-bottom: 15px;
+    }
 
-        input, select, textarea {
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
+    label {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+      display: block;
+    }
 
-        textarea {
-            resize: none;
-            height: 80px;
-        }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
 
-        button {
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    input:focus, select:focus, textarea:focus {
+      border-color: #320ac4;
+      outline: none;
+    }
 
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #320ac4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: #320ac4;
+    }
+
+    #map {
+      height: 300px;
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Internet Service Registration</h1>
-        <form action="submit_registration" method="POST">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+  <div class="container">
+    <h2>Form Pengisian Lokasi</h2>
 
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-
-            <label for="plan">Select Plan</label>
-            <select id="plan" name="plan" required>
-                <option value="basic">Basic Plan</option>
-                <option value="standard">Standard Plan</option>
-                <option value="premium">Premium Plan</option>
-            </select>
-
-            <label for="address">Installation Address</label>
-            <textarea id="address" name="address" placeholder="Enter your installation address" required></textarea>
-
-            <button type="submit">Register</button>
-        </form>
+    <!-- Langkah 1: Pilih Lokasi di Peta -->
+    <div class="form-group">
+      <label for="lokasi">Pilih Lokasi dari Peta:</label>
+      <input type="text" id="lokasi" placeholder="Cari lokasi..." disabled>
     </div>
+
+    <div id="map"></div>
+
+    <!-- Langkah 2: Dropdown Nama Kecamatan di Pekanbaru -->
+    <div class="form-group">
+      <label for="kecamatan">Pilih Kecamatan:</label>
+      <select id="kecamatan" required>
+        <option value="">Pilih Kecamatan</option>
+        <option value="Kecamatan 1">Kecamatan 1</option>
+        <option value="Kecamatan 2">Kecamatan 2</option>
+        <option value="Kecamatan 3">Kecamatan 3</option>
+        <option value="Kecamatan 4">Kecamatan 4</option>
+        <option value="Kecamatan 5">Kecamatan 5</option>
+        <option value="Kecamatan 6">Kecamatan 6</option>
+        <option value="Kecamatan 7">Kecamatan 7</option>
+        <option value="Kecamatan 8">Kecamatan 8</option>
+        <option value="Kecamatan 9">Kecamatan 9</option>
+        <option value="Kecamatan 10">Kecamatan 10</option>
+        <option value="Kecamatan 11">Kecamatan 11</option>
+        <option value="Kecamatan 12">Kecamatan 12</option>
+        <option value="Kecamatan 13">Kecamatan 13</option>
+        <option value="Kecamatan 14">Kecamatan 14</option>
+        <option value="Kecamatan 15">Kecamatan 15</option>
+      </select>
+    </div>
+
+    <!-- Langkah 3: Alamat Lengkap -->
+    <div class="form-group">
+      <label for="alamat">Alamat Lengkap:</label>
+      <textarea id="alamat" placeholder="Alamat lengkap Anda" required></textarea>
+    </div>
+
+    <button class="submit-btn" id="submit" onclick="submitForm()">Kirim</button>
+  </div>
+
+  <script>
+    let map;
+    let marker;
+    let geocoder;
+    let lokasiInput = document.getElementById('lokasi');
+    let kecamatanSelect = document.getElementById('kecamatan');
+    let alamatTextarea = document.getElementById('alamat');
+
+    function initMap() {
+      // Inisialisasi peta di Pekanbaru
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 0.5136, lng: 101.4454 }, // Koordinat Pekanbaru
+        zoom: 14
+      });
+      
+      geocoder = new google.maps.Geocoder();
+
+      // Tambahkan marker yang bisa digeser
+      marker = new google.maps.Marker({
+        map: map,
+        draggable: true,
+        position: map.getCenter(),
+      });
+
+      // Fungsi untuk mencari lokasi
+      const searchBox = new google.maps.places.SearchBox(lokasiInput);
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(lokasiInput);
+
+      searchBox.addListener('places_changed', function() {
+        const places = searchBox.getPlaces();
+        if (places.length == 0) {
+          return;
+        }
+
+        // Pilih tempat pertama dari hasil pencarian
+        const place = places[0];
+        map.panTo(place.geometry.location);
+        marker.setPosition(place.geometry.location);
+        getKecamatanFromLocation(place.geometry.location);
+      });
+
+      // Mendapatkan nama kecamatan setelah memilih lokasi
+      marker.addListener('dragend', function() {
+        geocodePosition(marker.getPosition());
+      });
+    }
+
+    // Fungsi untuk geocode posisi marker dan mendapatkan kecamatan
+    function geocodePosition(pos) {
+      geocoder.geocode({ location: pos }, function(results, status) {
+        if (status === 'OK') {
+          if (results[0]) {
+            getKecamatanFromLocation(pos);
+          }
+        } else {
+          alert('Geocode gagal: ' + status);
+        }
+      });
+    }
+
+    // Fungsi untuk mendapatkan nama kecamatan dari lokasi
+    function getKecamatanFromLocation(location) {
+      // Di sini Anda harus menggunakan data kecamatan Pekanbaru
+      // Ini contoh, Anda dapat mengganti dengan data kecamatan yang relevan
+      kecamatanSelect.innerHTML = `
+        <option value="Kecamatan 1">Kecamatan 1</option>
+        <option value="Kecamatan 2">Kecamatan 2</option>
+        <option value="Kecamatan 3">Kecamatan 3</option>
+        <option value="Kecamatan 4">Kecamatan 4</option>
+        <option value="Kecamatan 5">Kecamatan 5</option>
+        <option value="Kecamatan 6">Kecamatan 6</option>
+        <option value="Kecamatan 7">Kecamatan 7</option>
+        <option value="Kecamatan 8">Kecamatan 8</option>
+        <option value="Kecamatan 9">Kecamatan 9</option>
+        <option value="Kecamatan 10">Kecamatan 10</option>
+        <option value="Kecamatan 11">Kecamatan 11</option>
+        <option value="Kecamatan 12">Kecamatan 12</option>
+        <option value="Kecamatan 13">Kecamatan 13</option>
+        <option value="Kecamatan 14">Kecamatan 14</option>
+        <option value="Kecamatan 15">Kecamatan 15</option>
+      `;
+    }
+
+    // Fungsi untuk submit form
+    function submitForm() {
+      const alamat = alamatTextarea.value;
+      const lokasi = lokasiInput.value;
+      const kecamatan = kecamatanSelect.value;
+
+      if (!alamat || !lokasi || !kecamatan) {
+        alert('Harap isi semua data yang diperlukan.');
+      } else {
+        alert('Form berhasil dikirim!\nAlamat: ' + alamat + '\nLokasi: ' + lokasi + '\nKecamatan: ' + kecamatan);
+      }
+    }
+
+    window.onload = initMap;
+  </script>
 </body>
 </html>
