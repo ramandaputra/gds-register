@@ -30,7 +30,7 @@
       margin-bottom: 20px;
     }
 
-    .container {
+    .container1 {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -92,7 +92,6 @@
       width: 35%;
       background-color: #ffffff;
       padding: 20px;
-      padding-bottom: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -140,10 +139,23 @@
       margin-bottom: 20px;
     }
 
+    /* Media Query untuk Mobile */
+    @media (max-width: 768px) {
+      .container1 {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .packages, .form-wrapper {
+        width: 100%;
+        max-width: 400px;
+      }
+    }
+
     /* Step by step navigation */
 .container .steps {
   display: flex;
-  width: 40%;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   position: relative;
@@ -197,7 +209,7 @@
   left: 10px;
   height: 4px;
   width: 90%;
-  background: #e0e0e0;
+  background: linear-gradient(to right, #25079d 50%, #e0e0e0 50%);
   z-index: -1;
 }
 
@@ -213,58 +225,65 @@
   margin-top: 10px;
   font-size: 14px;
   color: #555;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  max-width: 400px;
+  width: 100%;
   margin-bottom: 20px;
 }
- .container1{
-    
- }
+
   </style>
 </head>
 <body>
-    <h2>Pilih Paket Anda</h2>
-
-    <div class="container1">
-        <div class="steps">
-            <div class="step">
-                <span class="circle active">1</span>
-                <span class="label">Cek Lokasi</span>
-            </div>
-            <div class="step">
-                <span class="circle active">2</span>
-                <span class="label">Isi Data Diri</span>
-            </div>
-            <div class="step">
-                <span class="circle">3</span>
-                <span class="label">Instalasi</span>
-            </div>
-            <div class="progress-bar" style="margin-bottom: 10%;">
-                <span class="indicator"></span>
-            </div>
+  <h2>Pilih Paket Anda</h2>
+ 
+  <div class="container">
+    <div class="steps">
+        <div class="step">
+            <span class="circle active">1</span>
+            <span class="label">Cek Lokasi</span>
+        </div>
+        <div class="step">
+            <span class="circle active">2</span>
+            <span class="label">Isi Data Diri</span>
+        </div>
+        <div class="step">
+            <span class="circle">3</span>
+            <span class="label">Instalasi</span>
+        </div>
+        <div class="progress-bar" style="margin-bottom: 7%;">
+            <span class="indicator"></span>
         </div>
     </div>
+</div>
 
-  <div class="container">
+  <div class="container1">
     <!-- Paket Options -->
     <div class="packages">
       <div class="package">
         <h3>Paket Basic</h3>
         <div class="price">Rp 500,000</div>
         <div class="description">Paket dasar dengan fitur terbatas dan akses ke konten dasar.</div>
-        <button class="btn">Pilih Paket</button>
+        <button class="btn">Selengkapnya</button>
       </div>
 
       <div class="package">
         <h3>Paket Premium</h3>
         <div class="price">Rp 1,000,000</div>
         <div class="description">Paket premium dengan fitur lengkap dan akses prioritas.</div>
-        <button class="btn">Pilih Paket</button>
+        <button class="btn">Selengkapnya</button>
       </div>
 
       <div class="package">
         <h3>Paket VIP</h3>
         <div class="price">Rp 2,000,000</div>
         <div class="description">Paket VIP dengan layanan eksklusif dan akses penuh ke semua konten.</div>
-        <button class="btn">Pilih Paket</button>
+        <button class="btn">Selengkapnya</button>
       </div>
     </div>
 
@@ -281,7 +300,7 @@
         <label for="telepon">Nomor Telepon/Whatsapp</label>
         <input type="tel" id="telepon" name="telepon" required>
 
-        <label for="telepon2">Nomor Telepon alternatif</label>
+        <label for="telepon2">Nomor Telepon Alternatif</label>
         <input type="tel" id="telepon2" name="telepon2" required>
         
         <label for="package">Paket yang Dipilih</label>
@@ -295,6 +314,5 @@
       </form>
     </div>
   </div>
-
 </body>
 </html>

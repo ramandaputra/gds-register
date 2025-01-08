@@ -200,7 +200,7 @@ textarea {
 <body>
   <!-- Banner -->
   <div class="banner">
-    <img src="promo.jpg" alt="Banner Promo">
+    <img src="https://via.placeholder.com/400x150" alt="Banner Image">
   </div>
 
   <div class="container">
@@ -307,6 +307,49 @@ textarea {
     }
 
     window.onload = initMap;
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const steps = document.querySelectorAll(".step .circle");
+  const indicator = document.querySelector(".progress-bar .indicator");
+
+  let currentStep = 0;
+
+  function updateProgress() {
+    steps.forEach((circle, index) => {
+      if (index <= currentStep) {
+        circle.classList.add("active");
+      } else {
+        circle.classList.remove("active");
+      }
+    });
+
+    const progressPercentage = (currentStep / (steps.length - 1)) * 100;
+    indicator.style.width = `${progressPercentage}%`;
+  }
+
+  function nextStep() {
+    if (currentStep < steps.length - 1) {
+      currentStep++;
+      updateProgress();
+    }
+  }
+
+  function previousStep() {
+    if (currentStep > 0) {
+      currentStep--;
+      updateProgress();
+    }
+  }
+
+  // Event listener untuk tombol next dan previous (jika ada)
+  document.getElementById("submit").addEventListener("click", () => {
+    nextStep();
+  });
+
+  // Simulasikan langkah-langkah (tambahkan tombol atau event lain untuk memicu previousStep jika diperlukan)
+  updateProgress();
+});
+
   </script>
 </body>
 </html>
