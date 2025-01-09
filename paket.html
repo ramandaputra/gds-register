@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,12 +32,12 @@
     }
 
     .container1 {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch; 
-    gap: 40px;
-    width: 100%;
-    max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 40px;
+      width: 100%;
+      max-width: 1200px;
     }
 
     .packages {
@@ -146,121 +147,122 @@
         align-items: center;
       }
 
-      .packages, .form-wrapper {
+      .packages,
+      .form-wrapper {
         width: 100%;
         max-width: 400px;
       }
     }
 
     /* Step by step navigation */
-.container .steps {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
+    .container .steps {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
 
-.progress {
-  display: flex;
-  width: 80%;
-  position: relative;
-  flex-direction: row;
-}
+    .progress {
+      display: flex;
+      width: 80%;
+      position: relative;
+      flex-direction: row;
+    }
 
-.progress-line {
-  position: absolute;
-  left: 50%;
-  width: 50%;
-  height: 2px;
-  background-color: #ccc;
-  transform: translateY(-50%);
-}
+    .progress-line {
+      position: absolute;
+      left: 50%;
+      width: 50%;
+      height: 2px;
+      background-color: #ccc;
+      transform: translateY(-50%);
+    }
 
-.steps .step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
+    .steps .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
 
-.steps .circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  width: 50px;
-  color: #999;
-  font-size: 22px;
-  font-weight: 500;
-  border-radius: 50%;
-  background: #fff;
-  border: 4px solid #e0e0e0;
-  transition: all 200ms ease;
-}
+    .steps .circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      width: 50px;
+      color: #999;
+      font-size: 22px;
+      font-weight: 500;
+      border-radius: 50%;
+      background: #fff;
+      border: 4px solid #e0e0e0;
+      transition: all 200ms ease;
+    }
 
-.steps .circle.active {
-  border-color: #25079d;
-  color: #25079d;
-}
+    .steps .circle.active {
+      border-color: #25079d;
+      color: #25079d;
+    }
 
-.steps .progress-bar {
-  position: absolute;
-  left: 10px;
-  height: 4px;
-  width: 90%;
-  background: linear-gradient(to right, #25079d 50%, #e0e0e0 50%);
-  z-index: -1;
-}
+    .steps .progress-bar {
+      position: absolute;
+      left: 10px;
+      height: 4px;
+      width: 90%;
+      background: linear-gradient(to right, #25079d 50%, #e0e0e0 50%);
+      z-index: -1;
+    }
 
-.progress-bar .indicator {
-  position: absolute;
-  height: 100%;
-  width: 0%;
-  background: #25079d;
-  transition: all 300ms ease;
-}
+    .progress-bar .indicator {
+      position: absolute;
+      height: 100%;
+      width: 0%;
+      background: #25079d;
+      transition: all 300ms ease;
+    }
 
-.steps .label {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #555;
-}
+    .steps .label {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  max-width: 400px;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
+
 <body>
   <h2>Pilih Paket Anda</h2>
- 
+
   <div class="container">
     <div class="steps">
-        <div class="step">
-            <span class="circle active">1</span>
-            <span class="label">Cek Lokasi</span>
-        </div>
-        <div class="step">
-            <span class="circle active">2</span>
-            <span class="label">Isi Data Diri</span>
-        </div>
-        <div class="step">
-            <span class="circle">3</span>
-            <span class="label">Instalasi</span>
-        </div>
-        <div class="progress-bar" style="margin-bottom: 7%;">
-            <span class="indicator"></span>
-        </div>
+      <div class="step">
+        <span class="circle active">1</span>
+        <span class="label">Cek Lokasi</span>
+      </div>
+      <div class="step">
+        <span class="circle active">2</span>
+        <span class="label">Isi Data Diri</span>
+      </div>
+      <div class="step">
+        <span class="circle">3</span>
+        <span class="label">Instalasi</span>
+      </div>
+      <div class="progress-bar" style="margin-bottom: 7%;">
+        <span class="indicator"></span>
+      </div>
     </div>
-</div>
+  </div>
 
   <div class="container1">
     <!-- Paket Options -->
@@ -302,7 +304,7 @@
 
         <label for="telepon2">Nomor Telepon Alternatif</label>
         <input type="tel" id="telepon2" name="telepon2" required>
-        
+
         <label for="package">Paket yang Dipilih</label>
         <select id="package" name="package" required>
           <option value="basic">BR Home Gold</option>
@@ -315,4 +317,5 @@
     </div>
   </div>
 </body>
+
 </html>
