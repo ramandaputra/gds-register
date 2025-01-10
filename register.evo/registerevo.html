@@ -203,7 +203,6 @@
     /* Popup container */
     .popup {
       display: none;
-      /* Hidden by default */
       position: fixed;
       top: 0;
       left: 0;
@@ -240,6 +239,25 @@
     #popup-message {
       font-size: 16px;
       color: #333;
+      margin-top: 10px;
+    }
+
+    /* ukuran icon */
+    .bi {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .bi-x-circle {
+      color: #e74c3c;
+    }
+
+    .bi-exclamation-triangle {
+      color: #f39c12;
+    }
+
+    .bi-check-circle {
+      color: #2ecc71;
     }
   </style>
 </head>
@@ -317,130 +335,133 @@
   <div id="popup" class="popup">
     <div class="popup-content">
       <span class="close-btn" onclick="closePopup()">&times;</span>
-      <i class="bi bi-exclamation-octagon"></i>
+      <i id="popup-icon" class="bi"></i> <!-- Ikon popup -->
       <p id="popup-message"></p>
     </div>
-
-    <script>
-
-      // JavaScript untuk menginisialisasi peta dan menangani form
-      function initMap() {
-        try {
-          const mapOptions = {
-            center: { lat: 0.5136, lng: 101.4454 },
-            zoom: 14,
-          };
-          const map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-          const marker = new google.maps.Marker({
-            map: map,
-            draggable: true,
-            position: mapOptions.center,
-          });
-
-          const geocoder = new google.maps.Geocoder();
-          google.maps.event.addListener(marker, "dragend", function () {
-            geocoder.geocode({ location: marker.getPosition() }, (results, status) => {
-              if (status === "OK" && results[0]) {
-                document.getElementById("lokasi").value = results[0].formatted_address;
-              } else {
-                alert("Tidak dapat menemukan lokasi. Silakan coba lagi.");
-              }
-            });
-          });
-        } catch (error) {
-          alert("Peta tidak dapat dimuat. Silakan periksa koneksi internet Anda.");
-        }
-      }
-
-      // Fungsi untuk menampilkan popup notifikasi
-      function showPopup(message) {
-        const popup = document.getElementById("popup");
-        const popupMessage = document.getElementById("popup-message");
-
-        popupMessage.textContent = message; // Mengisi pesan pada popup
-        popup.style.display = "flex"; // Menampilkan popup
-      }
-
-      // Fungsi untuk menutup popup
-      function closePopup() {
-        const popup = document.getElementById("popup");
-        popup.style.display = "none"; // Menyembunyikan popup
-      }
-
-      // Fungsi submitForm yang sudah diperbarui
-      function submitForm() {
-        // Mengambil nilai input dan menghapus spasi di awal/akhir
-        const lokasi = document.getElementById("lokasi").value.trim();
-        const kecamatan = document.getElementById("kecamatan").value.trim();
-        const alamat = document.getElementById("alamat").value.trim();
-
-        // Daftar kecamatan yang tercakup
-        const coveredAreas = ["Payung Sekaki", "Binawidya", "Tuah Madani"];
-
-        // Validasi jika ada data yang kosong
-        if (!lokasi || !kecamatan || !alamat) {
-          showPopup("Harap isi semua data!"); // Menampilkan popup jika ada data yang kosong
-          return;
-        }
-
-        // Validasi kecamatan dengan case insensitive
-        const isCovered = coveredAreas.some(area => area.toLowerCase() === kecamatan.toLowerCase());
-        if (!isCovered) {
-          showPopup(`Maaf, wilayah ${kecamatan} tidak masuk dalam jangkauan kami.`); // Menampilkan popup jika kecamatan tidak tercakup
-          return;
-        }
-
-        // Konfirmasi data jika valid
-        showPopup(`Wilayah ${kecamatan} masuk dalam jangkauan kami, Silahkan lanjut ke isi data diri.`); // Menampilkan popup konfirmasi jika data valid
-      }
+  </div>
 
 
-      window.onload = initMap;
+  <script>
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const steps = document.querySelectorAll(".step .circle");
-        const indicator = document.querySelector(".progress-bar .indicator");
+    // JavaScript untuk menginisialisasi peta dan menangani form
+    function initMap() {
+      try {
+        const mapOptions = {
+          center: { lat: 0.5136, lng: 101.4454 },
+          zoom: 14,
+        };
+        const map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-        let currentStep = 0;
-
-        function updateProgress() {
-          steps.forEach((circle, index) => {
-            if (index <= currentStep) {
-              circle.classList.add("active");
-            } else {
-              circle.classList.remove("active");
-            }
-          });
-
-          const progressPercentage = (currentStep / (steps.length - 1)) * 100;
-          indicator.style.width = `${progressPercentage}%`;
-        }
-
-        function nextStep() {
-          if (currentStep < steps.length - 1) {
-            currentStep++;
-            updateProgress();
-          }
-        }
-
-        function previousStep() {
-          if (currentStep > 0) {
-            currentStep--;
-            updateProgress();
-          }
-        }
-
-        // Event listener untuk tombol next dan previous (jika ada)
-        document.getElementById("submit").addEventListener("click", () => {
-          nextStep();
+        const marker = new google.maps.Marker({
+          map: map,
+          draggable: true,
+          position: mapOptions.center,
         });
 
-        // Simulasikan langkah-langkah (tambahkan tombol atau event lain untuk memicu previousStep jika diperlukan)
-        updateProgress();
+        const geocoder = new google.maps.Geocoder();
+        google.maps.event.addListener(marker, "dragend", function () {
+          geocoder.geocode({ location: marker.getPosition() }, (results, status) => {
+            if (status === "OK" && results[0]) {
+              document.getElementById("lokasi").value = results[0].formatted_address;
+            } else {
+              alert("Tidak dapat menemukan lokasi. Silakan coba lagi.");
+            }
+          });
+        });
+      } catch (error) {
+        alert("Peta tidak dapat dimuat. Silakan periksa koneksi internet Anda.");
+      }
+    }
+
+    function showPopup(message, iconClass) {
+      const popup = document.getElementById("popup");
+      const popupMessage = document.getElementById("popup-message");
+      const popupIcon = document.getElementById("popup-icon");
+
+      popupMessage.textContent = message; // Mengisi pesan pada popup
+      popupIcon.className = iconClass; // Mengubah class ikon sesuai dengan jenis popup
+      popup.style.display = "flex"; // Menampilkan popup
+    }
+
+    // Fungsi untuk menutup popup
+    function closePopup() {
+      const popup = document.getElementById("popup");
+      popup.style.display = "none"; // Menyembunyikan popup
+    }
+
+    function submitForm() {
+      // Mengambil nilai input dan menghapus spasi di awal/akhir
+      const lokasi = document.getElementById("lokasi").value.trim();
+      const kecamatan = document.getElementById("kecamatan").value.trim();
+      const alamat = document.getElementById("alamat").value.trim();
+
+      // Daftar kecamatan yang tercakup
+      const coveredAreas = ["Payung Sekaki", "Binawidya", "Tuah Madani"];
+
+      // Validasi jika ada data yang kosong
+      if (!lokasi || !kecamatan || !alamat) {
+        showPopup("Harap isi semua data!", "bi bi-exclamation-triangle"); // Ikon error jika data kosong
+        return;
+      }
+
+      // tidak dalam jangkauan
+      const isCovered = coveredAreas.some(area => area.toLowerCase() === kecamatan.toLowerCase());
+      if (!isCovered) {
+        showPopup(`Maaf, wilayah ${kecamatan} tidak masuk dalam jangkauan kami.`, "bi bi-x-circle"); // Ikon peringatan jika kecamatan tidak tercakup
+        return;
+      }
+
+      // Konfirmasi data jika valid dan dalam jangkauan
+      showPopup(`Wilayah ${kecamatan} masuk dalam jangkauan kami, Silahkan lanjut ke isi data diri.`, "bi bi-check-circle"); // Ikon sukses jika data valid
+
+      setTimeout(function () {
+        window.location.href = "paket.html";
+      }, 3000);
+    }
+
+    window.onload = initMap;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const steps = document.querySelectorAll(".step .circle");
+      const indicator = document.querySelector(".progress-bar .indicator");
+
+      let currentStep = 0;
+
+      function updateProgress() {
+        steps.forEach((circle, index) => {
+          if (index <= currentStep) {
+            circle.classList.add("active");
+          } else {
+            circle.classList.remove("active");
+          }
+        });
+
+        const progressPercentage = (currentStep / (steps.length - 1)) * 100;
+        indicator.style.width = `${progressPercentage}%`;
+      }
+
+      function nextStep() {
+        if (currentStep < steps.length - 1) {
+          currentStep++;
+          updateProgress();
+        }
+      }
+
+      function previousStep() {
+        if (currentStep > 0) {
+          currentStep--;
+          updateProgress();
+        }
+      }
+
+      document.getElementById("submit").addEventListener("click", () => {
+        nextStep();
       });
 
-    </script>
+      updateProgress();
+    });
+
+  </script>
 </body>
 
 </html>
