@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form Pengisian Lokasi</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places&callback=initMap"></script>
+  <script src=""></script>
   <style>
     /* Reset dan dasar layout */
     * {
@@ -295,10 +295,16 @@
 
     <div class="form-group">
       <label for="lokasi">Pilih Lokasi dari Peta:</label>
-      <input type="text" id="lokasi" placeholder="Cari lokasi..." enabled>
+      <input type="text" id="lokasi" placeholder="Cari lokasi..." disabled>
     </div>
 
-    <div id="map"></div>
+    <div id="map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255338.10594896713!2d101.27636290606391!3d0.5137890744504026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5ab80690ee7b1%3A0x94dde92c3823dbe4!2sPekanbaru%2C%20Pekanbaru%20City%2C%20Riau!5e0!3m2!1sen!2sid!4v1736503336907!5m2!1sen!2sid"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
 
     <!-- Dropdown Kecamatan -->
     <div class="form-group">
@@ -342,7 +348,6 @@
 
 
   <script>
-
     // JavaScript untuk menginisialisasi peta dan menangani form
     function initMap() {
       try {
@@ -390,16 +395,16 @@
     }
 
     function submitForm() {
-      // Mengambil nilai input dan menghapus spasi di awal/akhir
-      const lokasi = document.getElementById("lokasi").value.trim();
-      const kecamatan = document.getElementById("kecamatan").value.trim();
-      const alamat = document.getElementById("alamat").value.trim();
+      // Mendapatkan nilai dari input
+      let lokasi = document.getElementById('lokasi').value;
+      let kecamatan = document.getElementById('kecamatan').value;
+      let alamat = document.getElementById('alamat').value;
 
       // Daftar kecamatan yang tercakup
       const coveredAreas = ["Payung Sekaki", "Binawidya", "Tuah Madani"];
 
-      // Validasi jika ada data yang kosong
-      if (!lokasi || !kecamatan || !alamat) {
+      // Validasi jika ada data yang kosong, kecuali lokasi yang disabled
+      if ((!lokasi && !document.getElementById('lokasi').disabled) || !kecamatan || !alamat) {
         showPopup("Harap isi semua data!", "bi bi-exclamation-triangle"); // Ikon error jika data kosong
         return;
       }
@@ -421,47 +426,20 @@
 
     window.onload = initMap;
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const steps = document.querySelectorAll(".step .circle");
-      const indicator = document.querySelector(".progress-bar .indicator");
-
-      let currentStep = 0;
-
-      function updateProgress() {
-        steps.forEach((circle, index) => {
-          if (index <= currentStep) {
-            circle.classList.add("active");
-          } else {
-            circle.classList.remove("active");
-          }
-        });
-
-        const progressPercentage = (currentStep / (steps.length - 1)) * 100;
-        indicator.style.width = `${progressPercentage}%`;
-      }
-
-      function nextStep() {
-        if (currentStep < steps.length - 1) {
-          currentStep++;
-          updateProgress();
-        }
-      }
-
-      function previousStep() {
-        if (currentStep > 0) {
-          currentStep--;
-          updateProgress();
-        }
-      }
-
-      document.getElementById("submit").addEventListener("click", () => {
-        nextStep();
-      });
-
-      updateProgress();
+    // Pastikan tombol dengan id "submit" memanggil fungsi submitForm()
+    document.getElementById("submit").addEventListener("click", () => {
+      submitForm(); // Memanggil fungsi submitForm untuk proses validasi dan pengiriman
     });
 
+    // Pastikan fungsi updateProgress() ada jika ingin memperbarui status progress
+    function updateProgress() {
+      // Misalnya bisa menambah progres atau mengupdate status di form
+      console.log("Progress updated!");
+    }
+
+    updateProgress(); // Memanggil updateProgress() jika diperlukan
   </script>
+
 </body>
 
 </html>
