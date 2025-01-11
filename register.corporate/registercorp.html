@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Data Diri</title>
+    <style>
+        /* Reset default margins and paddings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Centering the form on the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            flex-direction: column; /* Stacks the content vertically */
+            text-align: center;
+        }
+
+        /* Banner styling - memperkecil ukuran banner */
+        .banner {
+            width: 100%;
+            max-width: 300px; /* Ukuran banner yang lebih kecil */
+            margin-bottom: 10px; /* Menambahkan ruang di bawah banner */
+        }
+
+        .banner img {
+            width: 100%; /* Membuat gambar responsif */
+        }
+
+        /* Form container */
+        .form-wrapper {
+            background-color: #ffffff;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px; /* Adjust the max width */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Form title */
+        .form-wrapper h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Label styling */
+        label {
+            font-size: 1rem;
+            text-align: start;
+            margin-bottom: 8px; /* Memberikan jarak lebih antara label dan input */
+            color: #555;
+            display: block;
+        }
+
+        /* Input fields */
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px; /* Menambahkan margin bawah untuk jarak antar input */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #25079d;
+            color: white;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background-color: #5c41ff;
+        }
+
+        /* Input and select focus state */
+        input:focus,
+        select:focus {
+            border-color: #25079d;
+            outline: none;
+        }
+
+        /* Button disabled state */
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Banner with Logo -->
+    <div class="banner">
+        <img src="http://gdshost.net/billing/assets/images/xlogo1.png.pagespeed.ic.8S05JGyY2g.webp" alt="Logo Perusahaan">
+    </div>
+
+    <!-- Formulir Data Diri -->
+    <div class="form-wrapper">
+        <h3>Formulir Data Diri</h3>
+        <form>
+            <label for="namaperusahaan">Nama Perusahaan</label>
+            <input type="text" id="namaperusahaan" name="namaperusahaan" required>
+
+            <label for="nama">Nama Pemesan</label>
+            <input type="text" id="nama" name="nama" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="alamat">Alamat</label>
+            <input type="text" id="alamat" name="alamat" required>            
+
+            <label for="telepon">Nomor Telepon yang dapat dihubungi</label>
+            <input type="tel" id="telepon" name="telepon" required>
+
+            <label for="telepon2">Nomor Telepon Perusahaan</label>
+            <input type="tel" id="telepon2" name="telepon2" required>
+
+            <button type="submit">Kirim Data</button>
+        </form>
+    </div>
+
+</body>
+</html>

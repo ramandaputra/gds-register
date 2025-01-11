@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <head>
   <meta charset="UTF-8">
@@ -85,7 +86,7 @@
     }
 
     .package .btn:hover {
-      background-color: #25079d;
+      background-color: #5c41ff;
     }
 
     /* Formulir Data Diri */
@@ -128,11 +129,12 @@
       border-radius: 4px;
       font-size: 16px;
       cursor: pointer;
+      margin-top: 10px;
       transition: background-color 0.3s;
     }
 
     .form-wrapper button:hover {
-      background-color: #25079d;
+      background-color: #5c41ff;
     }
 
     h2 {
@@ -251,6 +253,41 @@
       width: 100%;
       border-radius: 8px;
     }
+
+    /* Tambahkan styling untuk popup */
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      text-align: center;
+    }
+
+    .bi {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .bi-exclamation-triangle {
+      color: #f39c12;
+    }
+
+    .bi-check-circle {
+      color: #2ecc71;
+    }
+
+    .popup-message {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 
@@ -303,7 +340,7 @@
       <div class="package">
         <h3>BR HOME LITE</h3>
         <div class="price"></div>
-        <div class="description">layanan internet rumahan upto 3mbps</div>
+        <div class="description">Layanan Internet Rumahan upto 3mbps</div>
         <button class="btn">Selengkapnya</button>
       </div>
     </div>
@@ -311,7 +348,7 @@
     <!-- Formulir Data Diri -->
     <div class="form-wrapper">
       <h3>Formulir Data Diri</h3>
-      <form>
+      <form onsubmit="return validateForm()">
         <label for="nama">Nama Lengkap</label>
         <input type="text" id="nama" name="nama" required>
 
@@ -326,15 +363,59 @@
 
         <label for="package">Paket yang Dipilih</label>
         <select id="package" name="package" required>
-          <option value="basic">BR Home Gold</option>
-          <option value="premium">BR Home Silver</option>
-          <option value="vip">BR Home Lite</option>
+          <option value="gold">BR Home Gold</option>
+          <option value="silver">BR Home Silver</option>
+          <option value="lite">BR Home Lite</option>
         </select>
 
-        <button type="submit">Kirim Data</button>
+        <button type="submit">Lanjutkan</button>
       </form>
     </div>
   </div>
+
+  <!-- Popup -->
+  <div id="popup">
+    <div class="bi bi-check-circle"></div>
+    <div id="popupMessage" class="popup-message"></div>
+    <button onclick="closePopup()"></button>
+  </div>
+
+  <script>
+    function validateForm() {
+      // Data form validasi dan pop-up muncul
+      let nama = document.getElementById('nama').value;
+      let email = document.getElementById('email').value;
+      let telepon = document.getElementById('telepon').value;
+      let telepon2 = document.getElementById('telepon2').value;
+      let paket = document.getElementById('package').value;
+
+      // Validasi Form
+      if (!nama || !email || !telepon || !telepon2 || !paket) {
+        showPopup('Harap isi semua data');
+        return false;
+      }
+
+
+      // Tampilkan popup
+      showPopup('Data Anda telah diterima. Halaman akan dialihkan...');
+
+      // Menunggu beberapa detik untuk popup sebelum beralih halaman
+      setTimeout(function () {
+        window.location.href = "instalasi.html";
+      }, 3000);
+
+      return false; // Mencegah form pengiriman otomatis
+    }
+
+    function showPopup(message) {
+      document.getElementById('popupMessage').textContent = message;
+      document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+  </script>
 </body>
 
 </html>

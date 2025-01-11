@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 60px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 80%; 
+            max-width: 900px; 
+            aspect-ratio: 4 / 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 150px;
+            margin-bottom: 40px; 
+        }
+
+        .services ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .services ul li {
+            margin: 20px 0;
+        }
+
+        .service-btn {
+            background-color: #25079d;
+            color: white;
+            font-size: 1.5rem; 
+            font-weight: bold;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            width: 100%; 
+            max-width: 400px; 
+            margin: 0 auto; 
+        }
+
+        .service-btn:hover {
+            background-color: #5c41ff;
+            transform: scale(1.1); 
+        }
+
+        .service-btn:focus {
+            outline: none; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="http://gdshost.net/billing/assets/images/xlogo1.png.pagespeed.ic.8S05JGyY2g.webp" alt="Perusahaan Logo">
+        </div>
+        <h2>Pilih Kebutuhanmu</h2>
+        <nav class="services">
+            <ul>
+                <li>
+                    <button class="service-btn" onclick="window.location.href='register.evo/registerevo.html';">
+                        Internet Rumahan
+                    </button>
+                </li>
+                <li>
+                    <button class="service-btn" onclick="window.location.href='register.corporate/registercorp.html';">
+                        Internet Perusahaan
+                    </button>
+                </li>
+            </ul>
+            
+        </nav>
+    </div>
+</body>
+</html>
