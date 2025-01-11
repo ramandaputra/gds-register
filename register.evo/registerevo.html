@@ -228,10 +228,10 @@
     /* Close button */
     .close-btn {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 24px;
-      color: #333;
+      top: 20px;
+      right: 20px;
+      font-size: 36px;
+      color: #fff;
       cursor: pointer;
     }
 
@@ -341,14 +341,13 @@
   <div id="popup" class="popup">
     <div class="popup-content">
       <span class="close-btn" onclick="closePopup()">&times;</span>
-      <i id="popup-icon" class="bi"></i> <!-- Ikon popup -->
+      <i id="popup-icon" class="bi"></i> 
       <p id="popup-message"></p>
     </div>
   </div>
 
 
   <script>
-    // JavaScript untuk menginisialisasi peta dan menangani form
     function initMap() {
       try {
         const mapOptions = {
@@ -383,19 +382,17 @@
       const popupMessage = document.getElementById("popup-message");
       const popupIcon = document.getElementById("popup-icon");
 
-      popupMessage.textContent = message; // Mengisi pesan pada popup
-      popupIcon.className = iconClass; // Mengubah class ikon sesuai dengan jenis popup
-      popup.style.display = "flex"; // Menampilkan popup
+      popupMessage.textContent = message;
+      popupIcon.className = iconClass;
+      popup.style.display = "flex";
     }
 
-    // Fungsi untuk menutup popup
     function closePopup() {
       const popup = document.getElementById("popup");
-      popup.style.display = "none"; // Menyembunyikan popup
+      popup.style.display = "none";
     }
 
     function submitForm() {
-      // Mendapatkan nilai dari input
       let lokasi = document.getElementById('lokasi').value;
       let kecamatan = document.getElementById('kecamatan').value;
       let alamat = document.getElementById('alamat').value;
@@ -403,21 +400,18 @@
       // Daftar kecamatan yang tercakup
       const coveredAreas = ["Payung Sekaki", "Binawidya", "Tuah Madani"];
 
-      // Validasi jika ada data yang kosong, kecuali lokasi yang disabled
       if ((!lokasi && !document.getElementById('lokasi').disabled) || !kecamatan || !alamat) {
-        showPopup("Harap isi semua data!", "bi bi-exclamation-triangle"); // Ikon error jika data kosong
+        showPopup("Harap isi semua data!", "bi bi-exclamation-triangle");
         return;
       }
 
-      // tidak dalam jangkauan
       const isCovered = coveredAreas.some(area => area.toLowerCase() === kecamatan.toLowerCase());
       if (!isCovered) {
-        showPopup(`Maaf, wilayah ${kecamatan} tidak masuk dalam jangkauan kami.`, "bi bi-x-circle"); // Ikon peringatan jika kecamatan tidak tercakup
+        showPopup(`Maaf, wilayah ${kecamatan} tidak masuk dalam jangkauan kami.`, "bi bi-x-circle");
         return;
       }
 
-      // Konfirmasi data jika valid dan dalam jangkauan
-      showPopup(`Wilayah ${kecamatan} masuk dalam jangkauan kami, Silahkan lanjut ke isi data diri.`, "bi bi-check-circle"); // Ikon sukses jika data valid
+      showPopup(`Wilayah ${kecamatan} masuk dalam jangkauan kami, Silahkan lanjut ke isi data diri.`, "bi bi-check-circle");
 
       setTimeout(function () {
         window.location.href = "paket.html";
@@ -425,19 +419,15 @@
     }
 
     window.onload = initMap;
-
-    // Pastikan tombol dengan id "submit" memanggil fungsi submitForm()
     document.getElementById("submit").addEventListener("click", () => {
-      submitForm(); // Memanggil fungsi submitForm untuk proses validasi dan pengiriman
+      submitForm();
     });
 
-    // Pastikan fungsi updateProgress() ada jika ingin memperbarui status progress
     function updateProgress() {
-      // Misalnya bisa menambah progres atau mengupdate status di form
       console.log("Progress updated!");
     }
 
-    updateProgress(); // Memanggil updateProgress() jika diperlukan
+    updateProgress(); 
   </script>
 
 </body>
