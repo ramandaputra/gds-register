@@ -225,16 +225,6 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    /* Close button */
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 36px;
-      color: #fff;
-      cursor: pointer;
-    }
-
     /* Popup message styling */
     #popup-message {
       font-size: 16px;
@@ -340,8 +330,7 @@
 
   <div id="popup" class="popup">
     <div class="popup-content">
-      <span class="close-btn" onclick="closePopup()">&times;</span>
-      <i id="popup-icon" class="bi"></i> 
+      <i id="popup-icon" class="bi"></i>
       <p id="popup-message"></p>
     </div>
   </div>
@@ -385,6 +374,10 @@
       popupMessage.textContent = message;
       popupIcon.className = iconClass;
       popup.style.display = "flex";
+
+      setTimeout(function () {
+        closePopup();
+      }, 1000);
     }
 
     function closePopup() {
@@ -415,7 +408,7 @@
 
       setTimeout(function () {
         window.location.href = "paket.html";
-      }, 3000);
+      }, 1000);
     }
 
     window.onload = initMap;
@@ -429,6 +422,7 @@
 
     updateProgress(); 
   </script>
+
 
 </body>
 

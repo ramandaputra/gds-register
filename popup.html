@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Auto Close Popup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .bi {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .bi-x-circle {
+            color: #e74c3c;
+        }
+
+        .bi-exclamation-triangle {
+            color: #f39c12;
+        }
+
+        .bi-check-circle {
+            color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <button id="validateBtn" class="btn btn-primary">Validate Data</button>
+
+        <!-- Pop-up Modal -->
+        <div class="modal fade" id="popupModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <i class="bi" id="popupIcon"></i>
+                        <p id="popupMessage"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('validateBtn').addEventListener('click', function () {
+            // Simulate data validation
+            const isValid = Math.random() > 0.5; // Replace with actual validation logic
+
+            const popupModal = new bootstrap.Modal(document.getElementById('popupModal'));
+            const popupIcon = document.getElementById('popupIcon');
+            const popupMessage = document.getElementById('popupMessage');
+
+            if (isValid) {
+                // Data valid
+                popupIcon.className = 'bi bi-check-circle';
+                popupMessage.textContent = 'Data valid. Redirecting...';
+
+                popupModal.show();
+
+                setTimeout(() => {
+                    window.location.href = 'pick.html'; // Redirect to another HTML page
+                }, 3000);
+            } else {
+                // Data not valid
+                popupIcon.className = 'bi bi-x-circle';
+                popupMessage.textContent = 'Data not valid. Please try again.';
+
+                popupModal.show();
+
+                setTimeout(() => {
+                    popupModal.hide();
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
+
