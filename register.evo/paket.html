@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <head>
@@ -24,7 +24,6 @@
       padding: 20px;
     }
 
-    /* Banner */
     .banner {
       width: 100%;
       max-width: 400px;
@@ -89,7 +88,6 @@
       background-color: #5c41ff;
     }
 
-    /* Formulir Data Diri */
     .form-wrapper {
       width: 35%;
       background-color: #ffffff;
@@ -142,7 +140,6 @@
       margin-bottom: 20px;
     }
 
-    /* Media Query untuk Mobile */
     @media (max-width: 768px) {
       .container1 {
         flex-direction: column;
@@ -156,7 +153,6 @@
       }
     }
 
-    /* Step by step navigation */
     .container .steps {
       display: flex;
       width: 100%;
@@ -241,7 +237,6 @@
       margin-bottom: 20px;
     }
 
-    /* Banner */
     .banner {
       width: 100%;
       max-width: 400px;
@@ -254,22 +249,16 @@
       border-radius: 8px;
     }
 
-    /* Styling untuk overlay (backdrop) */
     .overlay {
       display: none;
-      /* Tersembunyi secara default */
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
-      /* Semi-transparan backdrop */
       z-index: 999;
-      /* Membuat overlay di atas konten lain */
     }
-
-    /* Tambahkan styling untuk popup */
 
     #popup {
       display: none;
@@ -283,7 +272,6 @@
       border: 1px solid #ccc;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       z-index: 1000;
-      /* Menempatkan popup di atas overlay */
       text-align: center;
     }
 
@@ -309,7 +297,6 @@
 
 <body>
 
-  <!-- Banner -->
   <div class="banner" style="align-items: center;">
     <img src="http://gdshost.net/billing/assets/images/logo1.png" alt="Banner Image">
   </div>
@@ -337,7 +324,6 @@
   </div>
 
   <div class="container1">
-    <!-- Paket Options -->
     <div class="packages">
       <div class="package">
         <h3>BR HOME GOLD</h3>
@@ -361,7 +347,6 @@
       </div>
     </div>
 
-    <!-- Formulir Data Diri -->
     <div class="form-wrapper">
       <h3>Formulir Data Diri</h3>
       <form onsubmit="return validateForm()">
@@ -389,7 +374,6 @@
     </div>
   </div>
 
-  <!-- Overlay dan Popup -->
   <div class="overlay" id="overlay"></div>
   <div id="popup">
     <i class="bi bi-check-circle"></i>
@@ -399,39 +383,35 @@
 
   <script>
     function validateForm() {
-      // Ambil nilai form
       let nama = document.getElementById('nama').value;
       let email = document.getElementById('email').value;
       let telepon = document.getElementById('telepon').value;
       let telepon2 = document.getElementById('telepon2').value;
       let paket = document.getElementById('package').value;
 
-      // Validasi Form
       if (!nama || !email || !telepon || !telepon2 || !paket) {
         showPopup('Harap isi semua data');
-        return false; // Mencegah pengiriman form jika ada yang kosong
+        return false;
       }
 
-      // Tampilkan popup
       showPopup('Data Anda telah diterima');
 
-      // Menunggu beberapa detik untuk popup sebelum beralih halaman
       setTimeout(function () {
-        window.location.href = "instalasi.html"; // Gantilah dengan URL tujuan Anda
+        window.location.href = "instalasi.html";
       }, 3000);
 
-      return false; // Mencegah form pengiriman otomatis
+      return false;
     }
 
     function showPopup(message) {
       document.getElementById('popupMessage').textContent = message;
       document.getElementById('popup').style.display = 'block';
-      document.getElementById('overlay').style.display = 'block'; // Menampilkan overlay
+      document.getElementById('overlay').style.display = 'block';
     }
 
     function closePopup() {
       document.getElementById('popup').style.display = 'none';
-      document.getElementById('overlay').style.display = 'none'; // Menyembunyikan overlay
+      document.getElementById('overlay').style.display = 'none';
     }
   </script>
 

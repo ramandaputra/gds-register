@@ -8,12 +8,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <script src=""></script>
   <style>
-    /* Reset dan dasar layout */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+    
+    @media (max-width: 768px) {
+      .container1 {
+        flex-direction: column;
+        align-items: center;
+      }}
 
     body {
       font-family: Arial, sans-serif;
@@ -26,7 +31,6 @@
       padding: 20px;
     }
 
-    /* Banner */
     .banner {
       width: 100%;
       max-width: 400px;
@@ -49,7 +53,6 @@
       margin-bottom: 20px;
     }
 
-    /* Step by step navigation */
     .container .steps {
       display: flex;
       width: 100%;
@@ -124,8 +127,6 @@
       color: #555;
     }
 
-
-    /* Form wrapper */
     .wrapper {
       width: 100%;
       max-width: 400px;
@@ -174,7 +175,6 @@
       min-height: 80px;
     }
 
-    /* Submit Button */
     .submit-btn {
       width: 100%;
       padding: 15px;
@@ -191,7 +191,6 @@
       background-color: #25079d;
     }
 
-    /* Map */
     #map {
       height: 300px;
       width: 100%;
@@ -200,7 +199,6 @@
       margin-bottom: 15px;
     }
 
-    /* Popup container */
     .popup {
       display: none;
       position: fixed;
@@ -214,7 +212,6 @@
       align-items: center;
     }
 
-    /* Popup content */
     .popup-content {
       background-color: #fff;
       padding: 20px;
@@ -225,14 +222,12 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    /* Popup message styling */
     #popup-message {
       font-size: 16px;
       color: #333;
       margin-top: 10px;
     }
 
-    /* ukuran icon */
     .bi {
       font-size: 40px;
       margin-bottom: 20px;
@@ -253,7 +248,6 @@
 </head>
 
 <body>
-  <!-- Banner -->
   <div class="banner" style="align-items: center;">
     <img src="http://gdshost.net/billing/assets/images/logo1.png" alt="Banner Image">
   </div>
@@ -278,8 +272,6 @@
     </div>
   </div>
 
-
-  <!-- Form -->
   <div class="wrapper">
     <h2>Form Pengisian Lokasi</h2>
 
@@ -296,7 +288,6 @@
       </iframe>
     </div>
 
-    <!-- Dropdown Kecamatan -->
     <div class="form-group">
       <label for="kecamatan">Pilih Kecamatan:</label>
       <select id="kecamatan" required>
@@ -319,7 +310,6 @@
       </select>
     </div>
 
-    <!-- Alamat Lengkap -->
     <div class="form-group">
       <label for="alamat">Alamat Lengkap:</label>
       <textarea id="alamat" placeholder="Alamat lengkap Anda" required></textarea>
@@ -390,7 +380,6 @@
       let kecamatan = document.getElementById('kecamatan').value;
       let alamat = document.getElementById('alamat').value;
 
-      // Daftar kecamatan yang tercakup
       const coveredAreas = ["Payung Sekaki", "Binawidya", "Tuah Madani"];
 
       if ((!lokasi && !document.getElementById('lokasi').disabled) || !kecamatan || !alamat) {
