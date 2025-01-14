@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabel Internet Perusahaan</title>
+    <!-- Link untuk Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F4F4F4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-title {
+            text-align: center;
+            color: #25079D;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        #searchInput {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #25079D;
+            border-radius: 5px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th,
+        .table td {
+            padding: 10px;
+            border: 1px solid #25079D;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #25079D;
+            color: white;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination i {
+            font-size: 24px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .btn {
+            background-color: #25079D;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background-color: #6A1B9A;
+        }
+
+        .banner {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin: 10px auto;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <img src="http://gdshost.net/billing/assets/images/xlogo1.png.pagespeed.ic.8S05JGyY2g.webp" alt="Banner Image">
+    </div>
+
+    <div class="container">
+        <h2 class="table-title">Tabel Pelanggan Internet Perusahaan</h2>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search..." id="searchInput">
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Kolom 1</th>
+                    <th>Kolom 2</th>
+                    <th>Kolom 3</th>
+                    <th>Kolom 4</th>
+                    <th>Kolom 5</th>
+                    <th>Kolom 6</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <i class="bi bi-arrow-left-circle-fill" id="prevBtn"></i>
+            <span id="pageNumber">1</span>
+            <i class="bi bi-arrow-right-circle-fill" id="nextBtn"></i>
+        </div>
+
+    </div>
+
+    <script>
+        const data = [
+            { col1: 'Data 1', col2: 'Data 2', col3: 'Data 3', col4: 'Data 4', col5: 'Data 5', col6: 'Data 6' },
+            { col1: 'Data 9', col2: 'Data 10', col3: 'Data 11', col4: 'Data 12', col5: 'Data 13', col6: 'Data 14' },
+            { col1: 'Data 17', col2: 'Data 18', col3: 'Data 19', col4: 'Data 20', col5: 'Data 21', col6: 'Data 22' },
+            { col1: 'Data 25', col2: 'Data 26', col3: 'Data 27', col4: 'Data 28', col5: 'Data 29', col6: 'Data 30' },
+            { col1: 'Data 33', col2: 'Data 34', col3: 'Data 35', col4: 'Data 36', col5: 'Data 37', col6: 'Data 38' },
+            { col1: 'Data 41', col2: 'Data 42', col3: 'Data 43', col4: 'Data 44', col5: 'Data 45', col6: 'Data 46' },
+            { col1: 'Data 49', col2: 'Data 50', col3: 'Data 51', col4: 'Data 52', col5: 'Data 53', col6: 'Data 54' },
+            { col1: 'Data 57', col2: 'Data 58', col3: 'Data 59', col4: 'Data 60', col5: 'Data 61', col6: 'Data 62' },
+            { col1: 'Data 65', col2: 'Data 66', col3: 'Data 67', col4: 'Data 68', col5: 'Data 69', col6: 'Data 70' },
+            { col1: 'Data 73', col2: 'Data 74', col3: 'Data 75', col4: 'Data 76', col5: 'Data 77', col6: 'Data 78' },
+            { col1: 'Data 81', col2: 'Data 82', col3: 'Data 83', col4: 'Data 84', col5: 'Data 85', col6: 'Data 86' },
+            { col1: 'Data 89', col2: 'Data 90', col3: 'Data 91', col4: 'Data 92', col5: 'Data 93', col6: 'Data 94' },
+            { col1: 'Data 97', col2: 'Data 98', col3: 'Data 99', col4: 'Data 100', col5: 'Data 101', col6: 'Data 102' },
+            { col1: 'Data 105', col2: 'Data 106', col3: 'Data 107', col4: 'Data 108', col5: 'Data 109', col6: 'Data 110' },
+            { col1: 'Data 113', col2: 'Data 114', col3: 'Data 115', col4: 'Data 116', col5: 'Data 117', col6: 'Data 118' },
+            { col1: 'Data 121', col2: 'Data 122', col3: 'Data 123', col4: 'Data 124', col5: 'Data 125', col6: 'Data 126' },
+            { col1: 'Data 129', col2: 'Data 130', col3: 'Data 131', col4: 'Data 132', col5: 'Data 133', col6: 'Data 134' },
+            { col1: 'Data 137', col2: 'Data 138', col3: 'Data 139', col4: 'Data 140', col5: 'Data 141', col6: 'Data 142' },
+            { col1: 'Data 145', col2: 'Data 146', col3: 'Data 147', col4: 'Data 148', col5: 'Data 149', col6: 'Data 150' }
+        ];
+
+        let currentPage = 1;
+        const rowsPerPage = 10;
+
+        function renderTable() {
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = currentPage * rowsPerPage;
+            const currentData = data.slice(startIndex, endIndex);
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            currentData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.col1}</td>
+                    <td>${item.col2}</td>
+                    <td>${item.col3}</td>
+                    <td>${item.col4}</td>
+                    <td>${item.col5}</td>
+                    <td>${item.col6}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            document.getElementById('pageNumber').innerText = currentPage;
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentPage < Math.ceil(data.length / rowsPerPage)) {
+                currentPage++;
+                renderTable();
+            }
+        });
+
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase();
+            const filteredData = data.filter(item =>
+                Object.values(item).some(val =>
+                    val.toLowerCase().includes(searchTerm)
+                )
+            );
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            filteredData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.col1}</td>
+                    <td>${item.col2}</td>
+                    <td>${item.col3}</td>
+                    <td>${item.col4}</td>
+                    <td>${item.col5}</td>
+                    <td>${item.col6}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        });
+
+        renderTable();
+    </script>
+</body>
+
+</html>
