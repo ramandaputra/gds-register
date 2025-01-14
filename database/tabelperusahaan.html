@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabel Internet Perusahaan</title>
-    <!-- Link untuk Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         body {
@@ -16,7 +15,7 @@
         }
 
         .container {
-            width: 80%;
+            max-width: 90%;
             margin: 20px auto;
             background-color: #FFFFFF;
             padding: 20px;
@@ -36,7 +35,8 @@
 
         #searchInput {
             padding: 10px;
-            width: 200px;
+            width: 100%;
+            max-width: 300px;
             border: 1px solid #25079D;
             border-radius: 5px;
         }
@@ -50,13 +50,21 @@
         .table th,
         .table td {
             padding: 10px;
-            border: 1px solid #25079D;
-            text-align: left;
+            text-align: center;
+            vertical-align: middle;
         }
 
         .table th {
             background-color: #25079D;
             color: white;
+        }
+
+        .table tr:nth-child(odd) {
+            background-color: #F4F4F4;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #FFFFFF;
         }
 
         .pagination {
@@ -68,16 +76,6 @@
             font-size: 24px;
             margin: 0 10px;
             cursor: pointer;
-        }
-
-        .btn {
-            background-color: #25079D;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
         }
 
         .btn:hover {
@@ -93,7 +91,7 @@
 
         .banner img {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
             object-position: center;
         }
@@ -115,12 +113,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Kolom 1</th>
-                    <th>Kolom 2</th>
-                    <th>Kolom 3</th>
-                    <th>Kolom 4</th>
-                    <th>Kolom 5</th>
-                    <th>Kolom 6</th>
+                    <th>NO</th>
+                    <th>Nama Perusahaan</th>
+                    <th>Nama Pemesan</th>
+                    <th>Email</th>
+                    <th>Nomor Telepon Pemesan</th>
+                    <th>Nomor Telepon Perusahaan</th>
+                    <th>Alamat</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -133,39 +132,45 @@
             <span id="pageNumber">1</span>
             <i class="bi bi-arrow-right-circle-fill" id="nextBtn"></i>
         </div>
-
     </div>
 
     <script>
-        const data = [
-            { col1: 'Data 1', col2: 'Data 2', col3: 'Data 3', col4: 'Data 4', col5: 'Data 5', col6: 'Data 6' },
-            { col1: 'Data 9', col2: 'Data 10', col3: 'Data 11', col4: 'Data 12', col5: 'Data 13', col6: 'Data 14' },
-            { col1: 'Data 17', col2: 'Data 18', col3: 'Data 19', col4: 'Data 20', col5: 'Data 21', col6: 'Data 22' },
-            { col1: 'Data 25', col2: 'Data 26', col3: 'Data 27', col4: 'Data 28', col5: 'Data 29', col6: 'Data 30' },
-            { col1: 'Data 33', col2: 'Data 34', col3: 'Data 35', col4: 'Data 36', col5: 'Data 37', col6: 'Data 38' },
-            { col1: 'Data 41', col2: 'Data 42', col3: 'Data 43', col4: 'Data 44', col5: 'Data 45', col6: 'Data 46' },
-            { col1: 'Data 49', col2: 'Data 50', col3: 'Data 51', col4: 'Data 52', col5: 'Data 53', col6: 'Data 54' },
-            { col1: 'Data 57', col2: 'Data 58', col3: 'Data 59', col4: 'Data 60', col5: 'Data 61', col6: 'Data 62' },
-            { col1: 'Data 65', col2: 'Data 66', col3: 'Data 67', col4: 'Data 68', col5: 'Data 69', col6: 'Data 70' },
-            { col1: 'Data 73', col2: 'Data 74', col3: 'Data 75', col4: 'Data 76', col5: 'Data 77', col6: 'Data 78' },
-            { col1: 'Data 81', col2: 'Data 82', col3: 'Data 83', col4: 'Data 84', col5: 'Data 85', col6: 'Data 86' },
-            { col1: 'Data 89', col2: 'Data 90', col3: 'Data 91', col4: 'Data 92', col5: 'Data 93', col6: 'Data 94' },
-            { col1: 'Data 97', col2: 'Data 98', col3: 'Data 99', col4: 'Data 100', col5: 'Data 101', col6: 'Data 102' },
-            { col1: 'Data 105', col2: 'Data 106', col3: 'Data 107', col4: 'Data 108', col5: 'Data 109', col6: 'Data 110' },
-            { col1: 'Data 113', col2: 'Data 114', col3: 'Data 115', col4: 'Data 116', col5: 'Data 117', col6: 'Data 118' },
-            { col1: 'Data 121', col2: 'Data 122', col3: 'Data 123', col4: 'Data 124', col5: 'Data 125', col6: 'Data 126' },
-            { col1: 'Data 129', col2: 'Data 130', col3: 'Data 131', col4: 'Data 132', col5: 'Data 133', col6: 'Data 134' },
-            { col1: 'Data 137', col2: 'Data 138', col3: 'Data 139', col4: 'Data 140', col5: 'Data 141', col6: 'Data 142' },
-            { col1: 'Data 145', col2: 'Data 146', col3: 'Data 147', col4: 'Data 148', col5: 'Data 149', col6: 'Data 150' }
-        ];
+    const data = [
+  { col1: 'Data 36', col2: 'Data 37', col3: 'Data 38', col4: 'Data 39', col5: 'Data 40', col6: 'Data 41', col7: 'Data 42' },
+  { col1: 'Data 43', col2: 'Data 44', col3: 'Data 45', col4: 'Data 46', col5: 'Data 47', col6: 'Data 48', col7: 'Data 49' },
+  { col1: 'Data 50', col2: 'Data 51', col3: 'Data 52', col4: 'Data 53', col5: 'Data 54', col6: 'Data 55', col7: 'Data 56' },
+  { col1: 'Data 57', col2: 'Data 58', col3: 'Data 59', col4: 'Data 60', col5: 'Data 61', col6: 'Data 62', col7: 'Data 63' },
+  { col1: 'Data 64', col2: 'Data 65', col3: 'Data 66', col4: 'Data 67', col5: 'Data 68', col6: 'Data 69', col7: 'Data 70' },
+  { col1: 'Data 71', col2: 'Data 72', col3: 'Data 73', col4: 'Data 74', col5: 'Data 75', col6: 'Data 76', col7: 'Data 77' },
+  { col1: 'Data 78', col2: 'Data 79', col3: 'Data 80', col4: 'Data 81', col5: 'Data 82', col6: 'Data 83', col7: 'Data 84' },
+  { col1: 'Data 85', col2: 'Data 86', col3: 'Data 87', col4: 'Data 88', col5: 'Data 89', col6: 'Data 90', col7: 'Data 91' },
+  { col1: 'Data 92', col2: 'Data 93', col3: 'Data 94', col4: 'Data 95', col5: 'Data 96', col6: 'Data 97', col7: 'Data 98' },
+  { col1: 'Data 99', col2: 'Data 100', col3: 'Data 101', col4: 'Data 102', col5: 'Data 103', col6: 'Data 104', col7: 'Data 105' },
+  { col1: 'Data 106', col2: 'Data 107', col3: 'Data 108', col4: 'Data 109', col5: 'Data 110', col6: 'Data 111', col7: 'Data 112' },
+  { col1: 'Data 113', col2: 'Data 114', col3: 'Data 115', col4: 'Data 116', col5: 'Data 117', col6: 'Data 118', col7: 'Data 119' },
+  { col1: 'Data 120', col2: 'Data 121', col3: 'Data 122', col4: 'Data 123', col5: 'Data 124', col6: 'Data 125', col7: 'Data 126' },
+  { col1: 'Data 127', col2: 'Data 128', col3: 'Data 129', col4: 'Data 130', col5: 'Data 131', col6: 'Data 132', col7: 'Data 133' },
+  { col1: 'Data 134', col2: 'Data 135', col3: 'Data 136', col4: 'Data 137', col5: 'Data 138', col6: 'Data 139', col7: 'Data 140' },
+  { col1: 'Data 141', col2: 'Data 142', col3: 'Data 143', col4: 'Data 144', col5: 'Data 145', col6: 'Data 146', col7: 'Data 147' },
+  { col1: 'Data 148', col2: 'Data 149', col3: 'Data 150', col4: 'Data 151', col5: 'Data 152', col6: 'Data 153', col7: 'Data 154' },
+  { col1: 'Data 155', col2: 'Data 156', col3: 'Data 157', col4: 'Data 158', col5: 'Data 159', col6: 'Data 160', col7: 'Data 161' },
+  { col1: 'Data 162', col2: 'Data 163', col3: 'Data 164', col4: 'Data 165', col5: 'Data 166', col6: 'Data 167', col7: 'Data 168' },
+  { col1: 'Data 169', col2: 'Data 170', col3: 'Data 171', col4: 'Data 172', col5: 'Data 173', col6: 'Data 174', col7: 'Data 175' },
+  { col1: 'Data 176', col2: 'Data 177', col3: 'Data 178', col4: 'Data 179', col5: 'Data 180', col6: 'Data 181', col7: 'Data 182' },
+  { col1: 'Data 183', col2: 'Data 184', col3: 'Data 185', col4: 'Data 186', col5: 'Data 187', col6: 'Data 188', col7: 'Data 189' },
+  { col1: 'Data 190', col2: 'Data 191', col3: 'Data 192', col4: 'Data 193', col5: 'Data 194', col6: 'Data 195', col7: 'Data 196' },
+  { col1: 'Data 197', col2: 'Data 198', col3: 'Data 199', col4: 'Data 200', col5: 'Data 201', col6: 'Data 202', col7: 'Data 203' },
+  { col1: 'Data 204', col2: 'Data 205', col3: 'Data 206', col4: 'Data 207', col5: 'Data 208', col6: 'Data 209', col7: 'Data 210' }
+]
 
         let currentPage = 1;
         const rowsPerPage = 10;
 
-        function renderTable() {
+        function renderTable(dataToRender = data) {
             const startIndex = (currentPage - 1) * rowsPerPage;
             const endIndex = currentPage * rowsPerPage;
-            const currentData = data.slice(startIndex, endIndex);
+            const currentData = dataToRender.slice(startIndex, endIndex);
+
             const tableBody = document.getElementById('tableBody');
             tableBody.innerHTML = '';
 
@@ -178,6 +183,7 @@
                     <td>${item.col4}</td>
                     <td>${item.col5}</td>
                     <td>${item.col6}</td>
+                    <td>${item.col7}</td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -203,24 +209,10 @@
             const searchTerm = this.value.toLowerCase();
             const filteredData = data.filter(item =>
                 Object.values(item).some(val =>
-                    val.toLowerCase().includes(searchTerm)
+                    String(val).toLowerCase().includes(searchTerm)
                 )
             );
-            const tableBody = document.getElementById('tableBody');
-            tableBody.innerHTML = '';
-
-            filteredData.forEach(item => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${item.col1}</td>
-                    <td>${item.col2}</td>
-                    <td>${item.col3}</td>
-                    <td>${item.col4}</td>
-                    <td>${item.col5}</td>
-                    <td>${item.col6}</td>
-                `;
-                tableBody.appendChild(row);
-            });
+            renderTable(filteredData);
         });
 
         renderTable();
