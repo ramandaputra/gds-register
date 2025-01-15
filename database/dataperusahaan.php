@@ -1,3 +1,42 @@
+<?php
+// Konfigurasi koneksi ke database
+$servername = "127.0.0.1"; // ganti dengan server database Anda
+$username = "root"; // ganti dengan username Anda
+$password = ""; // ganti dengan password Anda
+$dbname = "pelanggan_internet_perusahaan"; // ganti dengan nama database Anda
+
+// Membuat koneksi
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Mengecek koneksi
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query untuk mengambil data dari tabel dataperusahaan
+$sql = "SELECT * FROM dataperusahaan"; // pastikan nama tabel sesuai
+$result = $conn->query($sql);
+
+$data = [];
+
+// Mengecek apakah query mengembalikan data
+if ($result->num_rows > 0) {
+    // Mengambil data baris per baris
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+} else {
+    $data = []; // jika tidak ada hasil, kembalikan array kosong
+}
+
+// Menutup koneksi
+$conn->close();
+
+// Mengatur header untuk JSON response
+header('Content-Type: application/json'); // pastikan content type JSON
+echo json_encode($data);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
