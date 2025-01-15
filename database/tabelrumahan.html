@@ -8,106 +8,104 @@
     <!-- Link untuk Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #F4F4F4;
-        margin: 0;
-        padding: 0;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F4F4F4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-        width: 80%;
-        margin: 20px auto;
-        background-color: #FFFFFF;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-    .table-title {
-        text-align: center;
-        color: #25079D;
-    }
+        .table-title {
+            text-align: center;
+            color: #25079D;
+        }
 
-    .search-bar {
-        margin-bottom: 20px;
-        text-align: right;
-    }
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: right;
+        }
 
-    #searchInput {
-        padding: 10px;
-        width: 200px;
-        border: 1px solid #25079D;
-        border-radius: 5px;
-    }
+        #searchInput {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #25079D;
+            border-radius: 5px;
+        }
 
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
 
-    .table th,
-    .table td {
-        padding: 10px;
-        text-align: center;
-        vertical-align: middle;
-    }
+        .table th,
+        .table td {
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
 
-    .table th {
-        background-color: #25079D;
-        color: white;
-    }
+        .table th {
+            background-color: #25079D;
+            color: white;
+        }
 
-    .table tr:nth-child(odd) {
-        background-color: #F4F4F4;
-    }
+        .table tr:nth-child(odd) {
+            background-color: #F4F4F4;
+        }
 
-    .table tr:nth-child(even) {
-        background-color: #FFFFFF;
-    }
+        .table tr:nth-child(even) {
+            background-color: #FFFFFF;
+        }
 
-    .pagination {
-        text-align: center;
-        margin-top: 20px;
-    }
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    .pagination i {
-        font-size: 24px;
-        margin: 0 10px;
-        cursor: pointer;
-    }
+        .pagination i {
+            font-size: 24px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
 
-    .btn {
-        background-color: #25079D;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin: 5px;
-    }
+        .btn {
+            background-color: #25079D;
+            color: white;
+            margin: 1px;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    .btn:hover {
-        background-color: #6A1B9A;
-    }
+        .btn:hover {
+            background-color: #6A1B9A;
+        }
 
-    .banner {
-        width: 100%;
-        max-width: 400px;
-        text-align: center;
-        margin: 10px auto;
-    }
+        .banner {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin: 10px auto;
+        }
 
-    .banner img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
-</style>
-
-
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -133,6 +131,7 @@
                     <th>Paket Yang Dipilih</th>
                     <th>Kecamatan</th>
                     <th>Alamat Lengkap</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -150,57 +149,28 @@
 
     <script>
         const data = [
-            { col1: 'Data 1', col2: 'Data 2', col3: 'Data 3', col4: 'Data 4', col5: 'Data 5', col6: 'Data 6', col7: 'Data 7', col8: 'Data 8' },
-            { col1: 'Data 9', col2: 'Data 10', col3: 'Data 11', col4: 'Data 12', col5: 'Data 13', col6: 'Data 14', col7: 'Data 15', col8: 'Data 16' },
-            { col1: 'Data 17', col2: 'Data 18', col3: 'Data 19', col4: 'Data 20', col5: 'Data 21', col6: 'Data 22', col7: 'Data 23', col8: 'Data 24' },
-            { col1: 'Data 25', col2: 'Data 26', col3: 'Data 27', col4: 'Data 28', col5: 'Data 29', col6: 'Data 30', col7: 'Data 31', col8: 'Data 32' },
-            { col1: 'Data 33', col2: 'Data 34', col3: 'Data 35', col4: 'Data 36', col5: 'Data 37', col6: 'Data 38', col7: 'Data 39', col8: 'Data 40' },
-            { col1: 'Data 41', col2: 'Data 42', col3: 'Data 43', col4: 'Data 44', col5: 'Data 45', col6: 'Data 46', col7: 'Data 47', col8: 'Data 48' },
-            { col1: 'Data 49', col2: 'Data 50', col3: 'Data 51', col4: 'Data 52', col5: 'Data 53', col6: 'Data 54', col7: 'Data 55', col8: 'Data 56' },
-            { col1: 'Data 57', col2: 'Data 58', col3: 'Data 59', col4: 'Data 60', col5: 'Data 61', col6: 'Data 62', col7: 'Data 63', col8: 'Data 64' },
-            { col1: 'Data 65', col2: 'Data 66', col3: 'Data 67', col4: 'Data 68', col5: 'Data 69', col6: 'Data 70', col7: 'Data 71', col8: 'Data 72' },
-            { col1: 'Data 73', col2: 'Data 74', col3: 'Data 75', col4: 'Data 76', col5: 'Data 77', col6: 'Data 78', col7: 'Data 79', col8: 'Data 80' },
-            { col1: 'Data 81', col2: 'Data 82', col3: 'Data 83', col4: 'Data 84', col5: 'Data 85', col6: 'Data 86', col7: 'Data 87', col8: 'Data 88' },
-            { col1: 'Data 89', col2: 'Data 90', col3: 'Data 91', col4: 'Data 92', col5: 'Data 93', col6: 'Data 94', col7: 'Data 95', col8: 'Data 96' },
-            { col1: 'Data 97', col2: 'Data 98', col3: 'Data 99', col4: 'Data 100', col5: 'Data 101', col6: 'Data 102', col7: 'Data 103', col8: 'Data 104' },
-            { col1: 'Data 105', col2: 'Data 106', col3: 'Data 107', col4: 'Data 108', col5: 'Data 109', col6: 'Data 110', col7: 'Data 111', col8: 'Data 112' },
-            { col1: 'Data 113', col2: 'Data 114', col3: 'Data 115', col4: 'Data 116', col5: 'Data 117', col6: 'Data 118', col7: 'Data 119', col8: 'Data 120' },
-            { col1: 'Data 121', col2: 'Data 122', col3: 'Data 123', col4: 'Data 124', col5: 'Data 125', col6: 'Data 126', col7: 'Data 127', col8: 'Data 128' },
-            { col1: 'Data 129', col2: 'Data 130', col3: 'Data 131', col4: 'Data 132', col5: 'Data 133', col6: 'Data 134', col7: 'Data 135', col8: 'Data 136' },
-            { col1: 'Data 137', col2: 'Data 138', col3: 'Data 139', col4: 'Data 140', col5: 'Data 141', col6: 'Data 142', col7: 'Data 143', col8: 'Data 144' },
-            { col1: 'Data 145', col2: 'Data 146', col3: 'Data 147', col4: 'Data 148', col5: 'Data 149', col6: 'Data 150', col7: 'Data 151', col8: 'Data 152' },
-            { col1: 'Data 153', col2: 'Data 154', col3: 'Data 155', col4: 'Data 156', col5: 'Data 157', col6: 'Data 158', col7: 'Data 159', col8: 'Data 160' },
-            { col1: 'Data 161', col2: 'Data 162', col3: 'Data 163', col4: 'Data 164', col5: 'Data 165', col6: 'Data 166', col7: 'Data 167', col8: 'Data 168' },
-            { col1: 'Data 169', col2: 'Data 170', col3: 'Data 171', col4: 'Data 172', col5: 'Data 173', col6: 'Data 174', col7: 'Data 175', col8: 'Data 176' },
-            { col1: 'Data 177', col2: 'Data 178', col3: 'Data 179', col4: 'Data 180', col5: 'Data 181', col6: 'Data 182', col7: 'Data 183', col8: 'Data 184' },
-            { col1: 'Data 185', col2: 'Data 186', col3: 'Data 187', col4: 'Data 188', col5: 'Data 189', col6: 'Data 190', col7: 'Data 191', col8: 'Data 192' },
-            { col1: 'Data 193', col2: 'Data 194', col3: 'Data 195', col4: 'Data 196', col5: 'Data 197', col6: 'Data 198', col7: 'Data 199', col8: 'Data 200' },
-            { col1: 'Data 201', col2: 'Data 202', col3: 'Data 203', col4: 'Data 204', col5: 'Data 205', col6: 'Data 206', col7: 'Data 207', col8: 'Data 208' },
-            { col1: 'Data 209', col2: 'Data 210', col3: 'Data 211', col4: 'Data 212', col5: 'Data 213', col6: 'Data 214', col7: 'Data 215', col8: 'Data 216' },
-            { col1: 'Data 217', col2: 'Data 218', col3: 'Data 219', col4: 'Data 220', col5: 'Data 221', col6: 'Data 222', col7: 'Data 223', col8: 'Data 224' },
-            { col1: 'Data 225', col2: 'Data 226', col3: 'Data 227', col4: 'Data 228', col5: 'Data 229', col6: 'Data 230', col7: 'Data 231', col8: 'Data 232' },
-            { col1: 'Data 233', col2: 'Data 234', col3: 'Data 235', col4: 'Data 236', col5: 'Data 237', col6: 'Data 238', col7: 'Data 239', col8: 'Data 240' },
-            { col1: 'Data 241', col2: 'Data 242', col3: 'Data 243', col4: 'Data 244', col5: 'Data 245', col6: 'Data 246', col7: 'Data 247', col8: 'Data 248' },
-            { col1: 'Data 249', col2: 'Data 250', col3: 'Data 251', col4: 'Data 252', col5: 'Data 253', col6: 'Data 254', col7: 'Data 255', col8: 'Data 256' },
-            { col1: 'Data 257', col2: 'Data 258', col3: 'Data 259', col4: 'Data 260', col5: 'Data 261', col6: 'Data 262', col7: 'Data 263', col8: 'Data 264' },
-            { col1: 'Data 265', col2: 'Data 266', col3: 'Data 267', col4: 'Data 268', col5: 'Data 269', col6: 'Data 270', col7: 'Data 271', col8: 'Data 272' },
-            { col1: 'Data 273', col2: 'Data 274', col3: 'Data 275', col4: 'Data 276', col5: 'Data 277', col6: 'Data 278', col7: 'Data 279', col8: 'Data 280' },
-            { col1: 'Data 281', col2: 'Data 282', col3: 'Data 283', col4: 'Data 284', col5: 'Data 285', col6: 'Data 286', col7: 'Data 287', col8: 'Data 288' },
-            { col1: 'Data 289', col2: 'Data 290', col3: 'Data 291', col4: 'Data 292', col5: 'Data 293', col6: 'Data 294', col7: 'Data 295', col8: 'Data 296' },
-            { col1: 'Data 297', col2: 'Data 298', col3: 'Data 299', col4: 'Data 300', col5: 'Data 301', col6: 'Data 302', col7: 'Data 303', col8: 'Data 304' }
+            { no: 1, nama: "Putra", email: "putra@gmail.com.com", telepon: "082392930309", alternatif: "0123456789", paket: "Paket A", kecamatan: "Binawidya", alamat: "Jl. Mawar sakti No. 123" },
+            { no: 2, nama: "Dody", email: "dodod@gmial.com.com", telepon: "083820813689", alternatif: "08123456789", paket: "Paket B", kecamatan: "Payung Sekaki", alamat: "Jl. Melati sakti No. 456" }
         ];
-
 
         let currentPage = 1;
         const rowsPerPage = 10;
 
         function loadTableData(page) {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredData = data.filter(item => Object.values(item).some(val => val.toString().toLowerCase().includes(searchTerm)));
+
             const startIndex = (page - 1) * rowsPerPage;
             const endIndex = startIndex + rowsPerPage;
-            const currentPageData = data.slice(startIndex, endIndex);
+            const currentPageData = filteredData.slice(startIndex, endIndex);
 
             const tableBody = document.getElementById('tableBody');
             tableBody.innerHTML = ''; // Clear existing rows
+
+            if (currentPageData.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="9">No data found</td></tr>';
+                return;
+            }
 
             currentPageData.forEach(row => {
                 const tr = document.createElement('tr');
@@ -209,8 +179,46 @@
                     td.textContent = row[key];
                     tr.appendChild(td);
                 }
+
+                // Add action buttons
+                const actionTd = document.createElement('td');
+                const editBtn = document.createElement('button');
+                editBtn.innerHTML = '<i class="bi bi-pencil"></i>';
+                editBtn.classList.add('btn');
+                editBtn.onclick = () => editRow(row.no);
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.innerHTML = '<i class="bi bi-trash"></i>';
+                deleteBtn.classList.add('btn');
+                deleteBtn.onclick = () => deleteRow(row.no);
+
+                actionTd.appendChild(editBtn);
+                actionTd.appendChild(deleteBtn);
+                tr.appendChild(actionTd);
                 tableBody.appendChild(tr);
             });
+
+            document.getElementById('prevBtn').style.visibility = page === 1 ? 'hidden' : 'visible';
+            document.getElementById('nextBtn').style.visibility = (page * rowsPerPage >= filteredData.length) ? 'hidden' : 'visible';
+        }
+
+        function editRow(no) {
+            const row = data.find(item => item.no === no);
+            if (row) {
+                const newName = prompt("Edit Nama Lengkap:", row.nama);
+                if (newName && newName.trim()) {
+                    row.nama = newName.trim();
+                    loadTableData(currentPage);
+                }
+            }
+        }
+
+        function deleteRow(no) {
+            const index = data.findIndex(item => item.no === no);
+            if (index !== -1 && confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+                data.splice(index, 1);
+                loadTableData(currentPage);
+            }
         }
 
         // Previous button
@@ -229,6 +237,12 @@
                 loadTableData(currentPage);
                 document.getElementById('pageNumber').textContent = currentPage;
             }
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function () {
+            currentPage = 1; // Reset to first page on search
+            loadTableData(currentPage);
         });
 
         // Load the initial page
