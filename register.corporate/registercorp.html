@@ -9,12 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -26,15 +20,11 @@
             padding: 20px;
         }
 
-        .banner {
-            width: 100%;
-            max-width: 200px;
-            margin-bottom: 20px;
-        }
-
         .banner img {
             width: 100%;
+            max-width: 200px;
             height: auto;
+            margin-bottom: 20px;
         }
 
         .form-wrapper {
@@ -53,15 +43,12 @@
 
         label {
             font-size: 1rem;
-            text-align: start;
             margin-bottom: 8px;
             color: #555;
             display: block;
         }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"] {
+        input {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -101,9 +88,7 @@
                 font-size: 0.9rem;
             }
 
-            input[type="text"],
-            input[type="email"],
-            input[type="tel"] {
+            input {
                 padding: 8px;
             }
         }
@@ -112,7 +97,8 @@
 
 <body>
     <div class="banner">
-        <img src="http://gdshost.net/billing/assets/images/xlogo1.png.pagespeed.ic.8S05JGyY2g.webp" alt="Logo Perusahaan">
+        <img src="http://gdshost.net/billing/assets/images/xlogo1.png.pagespeed.ic.8S05JGyY2g.webp"
+            alt="Logo Perusahaan">
     </div>
 
     <div class="form-wrapper">
@@ -153,31 +139,60 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        const formData = [];
+
         document.getElementById('validateBtn').addEventListener('click', function () {
-            const isValid = Array.from(document.querySelectorAll('input')).every(input => input.value !== "");
+            const inputs = document.querySelectorAll('input');
+            const isValid = Array.from(inputs).every(input => input.value.trim() !== "");
 
             const popupModal = new bootstrap.Modal(document.getElementById('popupModal'));
             const popupIcon = document.getElementById('popupIcon');
             const popupMessage = document.getElementById('popupMessage');
 
             if (isValid) {
-                popupIcon.className = 'bi bi-check-circle text-success';
-                popupMessage.textContent = 'Data anda sudah diterima';
+                const newEntry = {
+                    id: formData.length + 1,
+                    namaperusahaan: document.getElementById('namaperusahaan').value,
+                    nama: document.getElementById('nama').value,
+                    email: document.getElementById('email').value,
+                    alamat: document.getElementById('alamat').value,
+                    telepon: document.getElementById('telepon').value,
+                    telepon2: document.getElementById('telepon2').value
+                };
 
-                popupModal.show();
+                formData.push(newEntry);
 
-                setTimeout(() => {
-                    window.location.href = 'instalasi.html';
-                }, 1000);
+                fetch('http://localhost:3000/save-data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newEntry)
+                })
+
+                    .then(response => response.json())
+                    .then(data => {
+                        popupIcon.className = 'bi bi-check-circle text-success';
+                        popupMessage.textContent = 'Data anda sudah diterima';
+
+                        popupModal.show();
+
+                        setTimeout(() => {
+                            popupModal.hide();
+                            window.location.href = 'instalasi.html';
+                        }, 1500);
+                    })
+                    .catch(error => {
+                        popupIcon.className = 'bi bi-x-circle text-danger';
+                        popupMessage.textContent = 'Terjadi kesalahan saat mengirim data';
+
+                        popupModal.show();
+                        setTimeout(() => popupModal.hide(), 1500);
+                    });
             } else {
                 popupIcon.className = 'bi bi-x-circle text-danger';
                 popupMessage.textContent = 'Harap isi semua Data';
 
                 popupModal.show();
-
-                setTimeout(() => {
-                    popupModal.hide();
-                }, 1000);
+                setTimeout(() => popupModal.hide(), 1500);
             }
         });
     </script>

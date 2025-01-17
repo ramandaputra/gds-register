@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabel Internet Rumahan</title>
+    <!-- Link untuk Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F4F4F4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-title {
+            text-align: center;
+            color: #25079D;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        #searchInput {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #25079D;
+            border-radius: 5px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th,
+        .table td {
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #25079D;
+            color: white;
+        }
+
+        .table tr:nth-child(odd) {
+            background-color: #F4F4F4;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #FFFFFF;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination i {
+            font-size: 24px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .btn {
+            background-color: #25079D;
+            color: white;
+            margin: 1px;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btntab {
+            background-color: #25079D;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            /* Membuat tombol menjadi blok */
+            margin: 10px auto;
+            /* Menyusun tombol rata tengah */
+            width: auto;
+            /* Lebar tombol otomatis */
+            text-align: center;
+            /* Menjaga teks tetap di tengah */
+        }
+
+        .btntab:hover {
+            background-color: #5c41ff;
+        }
+
+        .btn:hover {
+            background-color: #5c41ff;
+        }
+
+        .banner {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin: 10px auto;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <img src="http://gdshost.net/billing/assets/images/xlogo1.png.pagespeed.ic.8S05JGyY2g.webp" alt="Banner Image">
+    </div>
+
+    <div class="container">
+        <h2 class="table-title">Tabel Pelanggan Internet Rumahan</h2>
+
+        <button class="btntab" onclick="window.location.href='tabelperusahaan.html';">
+            Daftar Pelanggan Perusahaan
+        </button>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search..." id="searchInput">
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Lengkap</th>
+                    <th>Email</th>
+                    <th>Nomor Telepon/ Whatsapp</th>
+                    <th>Nomor Telepon Alternatif</th>
+                    <th>Paket Yang Dipilih</th>
+                    <th>Kecamatan</th>
+                    <th>Alamat Lengkap</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <i class="bi bi-arrow-left-circle-fill" id="prevBtn"></i>
+            <span id="pageNumber">1</span>
+            <i class="bi bi-arrow-right-circle-fill" id="nextBtn"></i>
+        </div>
+    </div>
+
+    <script>
+        let data = [];
+        let currentPage = 1;
+        const rowsPerPage = 10;
+
+        async function fetchData() {
+            try {
+                const response = await fetch('datarumahan.json');
+                if (!response.ok) throw new Error("Failed to fetch data");
+                data = await response.json();
+                loadTableData(currentPage);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        function loadTableData(page) {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredData = data.filter(item =>
+                Object.values(item).some(val => val.toString().toLowerCase().includes(searchTerm))
+            );
+
+            const startIndex = (page - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const currentPageData = filteredData.slice(startIndex, endIndex);
+
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            if (currentPageData.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="9">No data found</td></tr>';
+                return;
+            }
+
+            currentPageData.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+            <td>${startIndex + index + 1}</td>
+            <td>${row.nama_lengkap}</td>
+            <td>${row.email}</td>
+            <td>${row.nomor_telepon}</td>
+            <td>${row.nomor_telepon_alternatif}</td>
+            <td>${row.paket_dipilih}</td>
+            <td>${row.kecamatan}</td>
+            <td>${row.alamat_lengkap}</td>
+            <td>
+                <button class="btn" onclick="editRow(${row.id})"><i class="bi bi-pencil"></i></button>
+                <button class="btn" onclick="deleteRow(${row.id})"><i class="bi bi-trash"></i></button>
+            </td>
+        `;
+                tableBody.appendChild(tr);
+            });
+
+            document.getElementById('prevBtn').style.visibility = page === 1 ? 'hidden' : 'visible';
+            document.getElementById('nextBtn').style.visibility = (page * rowsPerPage >= filteredData.length) ? 'hidden' : 'visible';
+        }
+
+
+        function editRow(id) {
+            const row = data.find(item => item.id === id);
+            if (row) {
+                const newName = prompt("Edit Nama Perusahaan:", row.nama_perusahaan);
+                if (newName && newName.trim()) {
+                    row.nama_perusahaan = newName.trim();
+                    loadTableData(currentPage);
+                }
+            }
+        }
+
+        function deleteRow(id) {
+            const index = data.findIndex(item => item.id === id);
+            if (index !== -1 && confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+                data.splice(index, 1);
+                loadTableData(currentPage);
+            }
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', function () {
+            if (currentPage > 1) {
+                currentPage--;
+                loadTableData(currentPage);
+                document.getElementById('pageNumber').textContent = currentPage;
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', function () {
+            if (currentPage * rowsPerPage < data.length) {
+                currentPage++;
+                loadTableData(currentPage);
+                document.getElementById('pageNumber').textContent = currentPage;
+            }
+        });
+
+        document.getElementById('searchInput').addEventListener('input', function () {
+            currentPage = 1;
+            loadTableData(currentPage);
+        });
+
+        fetchData();
+    </script>
+</body>
+
+</html>
