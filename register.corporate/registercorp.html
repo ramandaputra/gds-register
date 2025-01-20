@@ -162,31 +162,30 @@
 
                 formData.push(newEntry);
 
-                fetch('http://localhost:3000/save-data', {
+                fetch('https://jsonplaceholder.typicode.com/posts', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(newEntry)
                 })
+                .then(response => response.json())
+                .then(data => {
+                    popupIcon.className = 'bi bi-check-circle text-success';
+                    popupMessage.textContent = 'Data anda sudah diterima';
 
-                    .then(response => response.json())
-                    .then(data => {
-                        popupIcon.className = 'bi bi-check-circle text-success';
-                        popupMessage.textContent = 'Data anda sudah diterima';
+                    popupModal.show();
 
-                        popupModal.show();
+                    setTimeout(() => {
+                        popupModal.hide();
+                        window.location.href = 'instalasi.html';
+                    }, 1500);
+                })
+                .catch(error => {
+                    popupIcon.className = 'bi bi-x-circle text-danger';
+                    popupMessage.textContent = 'Terjadi kesalahan saat mengirim data';
 
-                        setTimeout(() => {
-                            popupModal.hide();
-                            window.location.href = 'instalasi.html';
-                        }, 1500);
-                    })
-                    .catch(error => {
-                        popupIcon.className = 'bi bi-x-circle text-danger';
-                        popupMessage.textContent = 'Terjadi kesalahan saat mengirim data';
-
-                        popupModal.show();
-                        setTimeout(() => popupModal.hide(), 1500);
-                    });
+                    popupModal.show();
+                    setTimeout(() => popupModal.hide(), 1500);
+                });
             } else {
                 popupIcon.className = 'bi bi-x-circle text-danger';
                 popupMessage.textContent = 'Harap isi semua Data';
